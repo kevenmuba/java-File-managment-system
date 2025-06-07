@@ -14,9 +14,12 @@ public class AdminPage {
             System.out.println("Welcome, " + user.getUsername());
             System.out.println("1. Create File");
             System.out.println("2. View Files");
-            System.out.println("3. Delete File");
-            System.out.println("4. About Us");
-            System.out.println("5. Logout");
+            System.out.println("3. Read File");
+            System.out.println("4. Update File");
+            System.out.println("5. Delete File");
+            System.out.println("6. About Us");
+            System.out.println("7. Logout");
+
 
             System.out.print("Enter choice: ");
             choice = scanner.nextInt();
@@ -25,12 +28,14 @@ public class AdminPage {
             switch (choice) {
                 case 1 -> FileService.createFile();
                 case 2 -> FileService.viewFiles();
-                case 3 -> FileService.deleteFile();
-                case 4 -> AboutPage.show();
-                case 5 -> System.out.println("Logging out...");
+                case 3 -> FileService.readFile();
+                case 4 -> FileService.updateFile();
+                case 5 -> FileService.deleteFile();
+                case 6 -> AboutPage.show();
+                case 7 -> System.out.println("Logging out...");
                 default -> System.out.println("Invalid choice. Try again.");
             }
 
-        } while (choice != 5);
+        } while (choice != 7);
     }
 }

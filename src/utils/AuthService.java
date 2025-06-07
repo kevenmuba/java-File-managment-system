@@ -1,25 +1,27 @@
 package utils;
 
 import model.User;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AuthService {
-    private static List<User> users = new ArrayList<>();
+    private static User[] users = new User[3]; // Fixed-size array
 
     static {
         // Hardcoded users
-        users.add(new User("admin", "admin123", "admin"));     // Representative
-        users.add(new User("student1", "pass1", "client"));    // Classmate
-        users.add(new User("student2", "pass2", "client"));    // Classmate
+        users[0] = new User("jaffer", "jaffer123", "admin");
+        users[1] = new User("ruhama", "ruhama123", "admin");
+        users[2] = new User("awol", "awol123", "client");
     }
 
-    public static User login(String username, String password) {
+    public static User login(String username, String password) throws UserNotFoundException, IncorrectPasswordException {
         for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user;
+            if (user.getUsername().equals(username)) {
+                if (user.getPassword().equals(password)) {
+                    return user;
+                } else {
+                    throw new IncorrectPasswordException("Incorrect password. Please try again.");
+                }
             }
         }
-        return null; // Invalid credentials
+        throw new UserNotFoundException("Username not found. Please register before you try to login or try again.");
     }
 }
